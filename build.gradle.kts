@@ -1,69 +1,41 @@
 plugins {
-    java
     application
-    id("org.javamodularity.moduleplugin") version "1.8.12"
     id("org.openjfx.javafxplugin") version "0.0.13"
-    id("org.beryx.jlink") version "2.25.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
-
-group = "org.breachinthecontainment.launcher_client"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
-val junitVersion = "5.10.2"
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
-
 application {
-    mainModule.set("org.breachinthecontainment.launcher_client.launcher_client")
-    mainClass.set("org.breachinthecontainment.launcher_client.launcher_client.HelloApplication")
+    mainClass.set("org.breachinthecontainment.launcher_client.Main")
 }
 
 javafx {
-    version = "21"
-    modules = listOf("javafx.controls", "javafx.fxml", "javafx.web", "javafx.swing" , "javafx.media")
+    version = "20"
+    modules = listOf("javafx.controls")
 }
 
 dependencies {
-    implementation("org.controlsfx:controlsfx:11.2.1")
-    implementation("com.dlsc.formsfx:formsfx-core:11.6.0") {
-      exclude(group = "org.openjfx")
-    }
-    implementation("net.synedra:validatorfx:0.5.0") {
-      exclude(group = "org.openjfx")
-    }
-    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
-    implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")
-    implementation("eu.hansolo:tilesfx:21.0.3") {
-        exclude(group = "org.openjfx")
-    }
-    implementation("com.github.almasb:fxgl:17.3") {
-        exclude(group = "org.openjfx")
-        exclude(group = "org.jetbrains.kotlin")
-    }
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation("org.openjfx:javafx-controls:20")
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    archiveBaseName.set("breach_launcher")
+    archiveClassifier.set("") // no "-all" suffix
+    archiveVersion.set("")
+
+    manifest {
+        attributes["Main-Class"] = "org.breachinthecontainment.launcher_client.Main"
+    }
 }
 
-jlink {
-    imageZip.set(layout.buildDirectory.file("/distributions/app-${javafx.platform.classifier}.zip"))
-    options.set(listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages"))
-    launcher {
-        name = "app"
-    }
+tasks.build {
+    dependsOn(tasks.shadowJar)
+}
+
+// Add this block to ensure startScripts depends on shadowJar
+tasks.named("startScripts") {
+    dependsOn(tasks.shadowJar)
 }
