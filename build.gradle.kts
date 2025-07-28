@@ -1,5 +1,3 @@
-// Ignore the errors, it actually works when building.
-
 plugins {
     application
     id("org.openjfx.javafxplugin") version "0.0.13"
@@ -21,6 +19,8 @@ javafx {
 
 dependencies {
     implementation("org.openjfx:javafx-controls:20")
+    // Add the JSON library dependency
+    implementation("org.json:json:20231013") // You can check Maven Central for the latest version
 }
 
 tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
@@ -37,7 +37,6 @@ tasks.build {
     dependsOn(tasks.shadowJar)
 }
 
-// Add this block to ensure startScripts depends on shadowJar
 tasks.named("startScripts") {
     dependsOn(tasks.shadowJar)
 }
