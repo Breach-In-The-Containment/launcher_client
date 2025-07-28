@@ -1,3 +1,5 @@
+// Ignore the errors, it actually works when building.
+
 plugins {
     application
     id("org.openjfx.javafxplugin") version "0.0.13"
