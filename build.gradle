@@ -38,13 +38,13 @@ jar {
 jpackage {
 //    imageName = "LauncherClient"
     appName = "BreachInTheContainmentLauncher"
-    appVersion = "0.0.1"
+    appVersion = "1.0.0"
     vendor = "BREACHINTHECONTAINMENT"
-    mainClass = mainClassName
     input = "build/libs"
     destination = "build/jpackage"
     javaOptions = ["-Xmx1G"]
-    mainJar = ""
+    mainJar = "launcher_client.jar"
+    mainClass = "org.breachinthecontainment.launcher_client.Main"
 }
 
 tasks.jpackage.dependsOn tasks.jar
