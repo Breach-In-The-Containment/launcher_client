@@ -1,0 +1,937 @@
+ ~/GitH/Breach_In_The_Containment/launcher_client | on master +1 !20 ?4  ./gradlew clean build jpackage                                                                   1 err | at 16:47:20 
+
+> Task :compileJava FAILED
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:6: error: package javafx.application does not exist
+import javafx.application.Platform;
+                         ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:7: error: package javafx.beans.property does not exist
+import javafx.beans.property.DoubleProperty;
+                            ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:8: error: package javafx.beans.property does not exist
+import javafx.beans.property.SimpleDoubleProperty;
+                            ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:9: error: package javafx.geometry does not exist
+import javafx.geometry.Pos;
+                      ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:10: error: package javafx.scene does not exist
+import javafx.scene.Scene;
+                   ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:11: error: package javafx.scene.control does not exist
+import javafx.scene.control.Button;
+                           ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:12: error: package javafx.scene.control does not exist
+import javafx.scene.control.Label;
+                           ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:13: error: package javafx.scene.control does not exist
+import javafx.scene.control.ProgressBar;
+                           ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:14: error: package javafx.scene.image does not exist
+import javafx.scene.image.Image;
+                         ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:15: error: package javafx.scene.layout does not exist
+import javafx.scene.layout.BorderPane;
+                          ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:16: error: package javafx.scene.layout does not exist
+import javafx.scene.layout.HBox;
+                          ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:17: error: package javafx.scene.layout does not exist
+import javafx.scene.layout.VBox;
+                          ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:18: error: package javafx.scene.text does not exist
+import javafx.scene.text.Font;
+                        ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:19: error: package javafx.stage does not exist
+import javafx.stage.Modality;
+                   ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:20: error: package javafx.stage does not exist
+import javafx.stage.Stage;
+                   ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:42: error: cannot find symbol
+    public static void startApplicationFlow(Stage primaryStage, String launcherDirectory, LauncherLogger appLogger) {
+                                            ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:59: error: cannot find symbol
+    public static void showMainWindow(Stage stage) {
+                                      ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:128: error: cannot find symbol
+    public static void startSetupFlow(Stage ownerStage, String launcherDirectory, LauncherLogger appLogger) {
+                                      ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:269: error: cannot find symbol
+    private static void showPlaceholderErrorWindow(Stage ownerStage) {
+                                                   ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:304: error: cannot find symbol
+    public static void showMiscountErrorWindow(Stage ownerStage, LauncherLogger logger, Runnable onExit, Runnable onLaunchAnyway) {
+                                               ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:5: error: package javafx.application does not exist
+import javafx.application.Application;
+                         ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:6: error: package javafx.stage does not exist
+import javafx.stage.Stage;
+                   ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:8: error: cannot find symbol
+public class Main extends Application { // Main now extends Application
+                          ^
+  symbol: class Application
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:14: error: cannot find symbol
+    public void start(Stage primaryStage) throws Exception {
+                      ^
+  symbol:   class Stage
+  location: class Main
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:67: error: cannot find symbol
+            Platform.exit(); // Exit the JavaFX application
+            ^
+  symbol:   variable Platform
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:73: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+            ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:73: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                             ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:80: error: cannot find symbol
+        Label title = new Label("BREACH IN THE CONTAINMENT");
+        ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:80: error: cannot find symbol
+        Label title = new Label("BREACH IN THE CONTAINMENT");
+                          ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:81: error: cannot find symbol
+        title.setFont(Font.font("Arial", 24));
+                      ^
+  symbol:   variable Font
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:82: error: cannot find symbol
+        Label subtitle = new Label("Launcher [CLIENT]");
+        ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:82: error: cannot find symbol
+        Label subtitle = new Label("Launcher [CLIENT]");
+                             ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:83: error: cannot find symbol
+        subtitle.setFont(Font.font("Arial", 18));
+                         ^
+  symbol:   variable Font
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:85: error: cannot find symbol
+        Button playBtn = new Button("Play!");
+        ^
+  symbol:   class Button
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:85: error: cannot find symbol
+        Button playBtn = new Button("Play!");
+                             ^
+  symbol:   class Button
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:93: error: cannot find symbol
+        Button quitBtn = new Button("Quit");
+        ^
+  symbol:   class Button
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:93: error: cannot find symbol
+        Button quitBtn = new Button("Quit");
+                             ^
+  symbol:   class Button
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:100: error: cannot find symbol
+            Platform.exit();
+            ^
+  symbol:   variable Platform
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:104: error: cannot find symbol
+        BorderPane root = new BorderPane();
+        ^
+  symbol:   class BorderPane
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:104: error: cannot find symbol
+        BorderPane root = new BorderPane();
+                              ^
+  symbol:   class BorderPane
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:105: error: cannot find symbol
+        HBox topLeftBox = new HBox(quitBtn);
+        ^
+  symbol:   class HBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:105: error: cannot find symbol
+        HBox topLeftBox = new HBox(quitBtn);
+                              ^
+  symbol:   class HBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:106: error: cannot find symbol
+        topLeftBox.setAlignment(Pos.TOP_LEFT);
+                                ^
+  symbol:   variable Pos
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:110: error: cannot find symbol
+        VBox centerLayout = new VBox(15, title, subtitle, playBtn);
+        ^
+  symbol:   class VBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:110: error: cannot find symbol
+        VBox centerLayout = new VBox(15, title, subtitle, playBtn);
+                                ^
+  symbol:   class VBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:111: error: cannot find symbol
+        centerLayout.setAlignment(Pos.TOP_CENTER);
+                                  ^
+  symbol:   variable Pos
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:115: error: cannot find symbol
+        Scene scene = new Scene(root, 450, 300);
+        ^
+  symbol:   class Scene
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:115: error: cannot find symbol
+        Scene scene = new Scene(root, 450, 300);
+                          ^
+  symbol:   class Scene
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:131: error: cannot find symbol
+        Stage progressStage = new Stage();
+        ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:131: error: cannot find symbol
+        Stage progressStage = new Stage();
+                                  ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:132: error: cannot find symbol
+        progressStage.initModality(Modality.APPLICATION_MODAL);
+                                   ^
+  symbol:   variable Modality
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:138: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+            ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:138: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                             ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:145: error: cannot find symbol
+        Label progressLabel = new Label("Initializing...");
+        ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:145: error: cannot find symbol
+        Label progressLabel = new Label("Initializing...");
+                                  ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:146: error: cannot find symbol
+        progressLabel.setFont(Font.font("Arial", 14));
+                              ^
+  symbol:   variable Font
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:148: error: cannot find symbol
+        ProgressBar progressBar = new ProgressBar(0);
+        ^
+  symbol:   class ProgressBar
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:148: error: cannot find symbol
+        ProgressBar progressBar = new ProgressBar(0);
+                                      ^
+  symbol:   class ProgressBar
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:151: error: cannot find symbol
+        DoubleProperty progressProperty = new SimpleDoubleProperty(0.0);
+        ^
+  symbol:   class DoubleProperty
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:151: error: cannot find symbol
+        DoubleProperty progressProperty = new SimpleDoubleProperty(0.0);
+                                              ^
+  symbol:   class SimpleDoubleProperty
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:154: error: cannot find symbol
+        VBox layout = new VBox(15, progressLabel, progressBar);
+        ^
+  symbol:   class VBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:154: error: cannot find symbol
+        VBox layout = new VBox(15, progressLabel, progressBar);
+                          ^
+  symbol:   class VBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:155: error: cannot find symbol
+        layout.setAlignment(Pos.CENTER);
+                            ^
+  symbol:   variable Pos
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:158: error: cannot find symbol
+        Scene scene = new Scene(layout, 350, 150);
+        ^
+  symbol:   class Scene
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:158: error: cannot find symbol
+        Scene scene = new Scene(layout, 350, 150);
+                          ^
+  symbol:   class Scene
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:162: error: package javafx.concurrent does not exist
+        javafx.concurrent.Task<Installer.SetupResult> setupTask = new javafx.concurrent.Task<Installer.SetupResult>() {
+                         ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:162: error: package javafx.concurrent does not exist
+        javafx.concurrent.Task<Installer.SetupResult> setupTask = new javafx.concurrent.Task<Installer.SetupResult>() {
+                                                                                       ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:163: error: method does not override or implement a method from a supertype
+            @Override
+            ^
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:165: error: cannot find symbol
+                Consumer<String> textProgressUpdater = message -> Platform.runLater(() -> {
+                                                                  ^
+  symbol: variable Platform
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:169: error: cannot find symbol
+                Consumer<Double> percentageProgressUpdater = percentage -> Platform.runLater(() -> {
+                                                                           ^
+  symbol: variable Platform
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:182: error: cannot find symbol
+            Platform.runLater(() -> {
+            ^
+  symbol:   variable Platform
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:197: error: cannot find symbol
+                                Platform.exit();
+                                ^
+  symbol:   variable Platform
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:209: error: cannot find symbol
+                    Platform.exit();
+                    ^
+  symbol:   variable Platform
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:216: error: cannot find symbol
+            Platform.runLater(() -> {
+            ^
+  symbol:   variable Platform
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:222: error: cannot find symbol
+                Platform.exit();
+                ^
+  symbol:   variable Platform
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:237: error: cannot find symbol
+        Stage alertStage = new Stage();
+        ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:237: error: cannot find symbol
+        Stage alertStage = new Stage();
+                               ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:238: error: cannot find symbol
+        alertStage.initModality(Modality.APPLICATION_MODAL);
+                                ^
+  symbol:   variable Modality
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:242: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+            ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:242: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                             ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:249: error: cannot find symbol
+        Label msgLabel = new Label(message);
+        ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:249: error: cannot find symbol
+        Label msgLabel = new Label(message);
+                             ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:251: error: cannot find symbol
+        msgLabel.setAlignment(Pos.CENTER);
+                              ^
+  symbol:   variable Pos
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:254: error: cannot find symbol
+        Button okButton = new Button("OK");
+        ^
+  symbol:   class Button
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:254: error: cannot find symbol
+        Button okButton = new Button("OK");
+                              ^
+  symbol:   class Button
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:257: error: cannot find symbol
+        VBox layout = new VBox(15, msgLabel, okButton);
+        ^
+  symbol:   class VBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:257: error: cannot find symbol
+        VBox layout = new VBox(15, msgLabel, okButton);
+                          ^
+  symbol:   class VBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:258: error: cannot find symbol
+        layout.setAlignment(Pos.CENTER);
+                            ^
+  symbol:   variable Pos
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:260: error: cannot find symbol
+        Scene scene = new Scene(layout, 400, 180);
+        ^
+  symbol:   class Scene
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:260: error: cannot find symbol
+        Scene scene = new Scene(layout, 400, 180);
+                          ^
+  symbol:   class Scene
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:270: error: cannot find symbol
+        Stage errorWindow = new Stage();
+        ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:270: error: cannot find symbol
+        Stage errorWindow = new Stage();
+                                ^
+  symbol:   class Stage
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:271: error: cannot find symbol
+        errorWindow.initModality(Modality.APPLICATION_MODAL);
+                                 ^
+  symbol:   variable Modality
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:276: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+            ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:276: error: cannot find symbol
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                             ^
+  symbol:   class Image
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:283: error: cannot find symbol
+        Label errorMessage = new Label("This is a placeholder error because nothing has been developed yet!");
+        ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:283: error: cannot find symbol
+        Label errorMessage = new Label("This is a placeholder error because nothing has been developed yet!");
+                                 ^
+  symbol:   class Label
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:286: error: cannot find symbol
+        errorMessage.setAlignment(Pos.CENTER);
+                                  ^
+  symbol:   variable Pos
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:288: error: cannot find symbol
+        VBox errorLayout = new VBox(10, errorMessage);
+        ^
+  symbol:   class VBox
+  location: class UI
+/Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:288: error: cannot find symbol
+        VBox errorLayout = new VBox(10, errorMessage);
+                               ^
+  symbol:   class VBox
+  location: class UI
+Note: /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/GitHubReleaseChecker.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+100 errors
+[Incubating] Problems report is available at: file:///Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:163: error: method does not override or implement a method from a supertype
+              @Override
+              ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:8: error: cannot find symbol
+  public class Main extends Application { // Main now extends Application
+                            ^
+    symbol: class Application
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:165: error: cannot find symbol
+                  Consumer<String> textProgressUpdater = message -> Platform.runLater(() -> {
+                                                                    ^
+    symbol: variable Platform
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:169: error: cannot find symbol
+                  Consumer<Double> percentageProgressUpdater = percentage -> Platform.runLater(() -> {
+                                                                             ^
+    symbol: variable Platform
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:6: error: package javafx.application does not exist
+  import javafx.application.Platform;
+                           ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:7: error: package javafx.beans.property does not exist
+  import javafx.beans.property.DoubleProperty;
+                              ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:8: error: package javafx.beans.property does not exist
+  import javafx.beans.property.SimpleDoubleProperty;
+                              ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:9: error: package javafx.geometry does not exist
+  import javafx.geometry.Pos;
+                        ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:10: error: package javafx.scene does not exist
+  import javafx.scene.Scene;
+                     ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:11: error: package javafx.scene.control does not exist
+  import javafx.scene.control.Button;
+                             ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:12: error: package javafx.scene.control does not exist
+  import javafx.scene.control.Label;
+                             ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:13: error: package javafx.scene.control does not exist
+  import javafx.scene.control.ProgressBar;
+                             ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:14: error: package javafx.scene.image does not exist
+  import javafx.scene.image.Image;
+                           ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:15: error: package javafx.scene.layout does not exist
+  import javafx.scene.layout.BorderPane;
+                            ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:16: error: package javafx.scene.layout does not exist
+  import javafx.scene.layout.HBox;
+                            ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:17: error: package javafx.scene.layout does not exist
+  import javafx.scene.layout.VBox;
+                            ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:18: error: package javafx.scene.text does not exist
+  import javafx.scene.text.Font;
+                          ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:19: error: package javafx.stage does not exist
+  import javafx.stage.Modality;
+                     ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:20: error: package javafx.stage does not exist
+  import javafx.stage.Stage;
+                     ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:5: error: package javafx.application does not exist
+  import javafx.application.Application;
+                           ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:6: error: package javafx.stage does not exist
+  import javafx.stage.Stage;
+                     ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:162: error: package javafx.concurrent does not exist
+          javafx.concurrent.Task<Installer.SetupResult> setupTask = new javafx.concurrent.Task<Installer.SetupResult>() {
+                           ^
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:162: error: package javafx.concurrent does not exist
+          javafx.concurrent.Task<Installer.SetupResult> setupTask = new javafx.concurrent.Task<Installer.SetupResult>() {
+                                                                                         ^
+  Note: Recompile with -Xlint:deprecation for details.
+  Note: /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/GitHubReleaseChecker.java uses or overrides a deprecated API.
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:42: error: cannot find symbol
+      public static void startApplicationFlow(Stage primaryStage, String launcherDirectory, LauncherLogger appLogger) {
+                                              ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:59: error: cannot find symbol
+      public static void showMainWindow(Stage stage) {
+                                        ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:128: error: cannot find symbol
+      public static void startSetupFlow(Stage ownerStage, String launcherDirectory, LauncherLogger appLogger) {
+                                        ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:269: error: cannot find symbol
+      private static void showPlaceholderErrorWindow(Stage ownerStage) {
+                                                     ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:304: error: cannot find symbol
+      public static void showMiscountErrorWindow(Stage ownerStage, LauncherLogger logger, Runnable onExit, Runnable onLaunchAnyway) {
+                                                 ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/Main.java:14: error: cannot find symbol
+      public void start(Stage primaryStage) throws Exception {
+                        ^
+    symbol:   class Stage
+    location: class Main
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:67: error: cannot find symbol
+              Platform.exit(); // Exit the JavaFX application
+              ^
+    symbol:   variable Platform
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:73: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+              ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:73: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                               ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:80: error: cannot find symbol
+          Label title = new Label("BREACH IN THE CONTAINMENT");
+          ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:80: error: cannot find symbol
+          Label title = new Label("BREACH IN THE CONTAINMENT");
+                            ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:81: error: cannot find symbol
+          title.setFont(Font.font("Arial", 24));
+                        ^
+    symbol:   variable Font
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:82: error: cannot find symbol
+          Label subtitle = new Label("Launcher [CLIENT]");
+          ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:82: error: cannot find symbol
+          Label subtitle = new Label("Launcher [CLIENT]");
+                               ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:83: error: cannot find symbol
+          subtitle.setFont(Font.font("Arial", 18));
+                           ^
+    symbol:   variable Font
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:85: error: cannot find symbol
+          Button playBtn = new Button("Play!");
+          ^
+    symbol:   class Button
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:85: error: cannot find symbol
+          Button playBtn = new Button("Play!");
+                               ^
+    symbol:   class Button
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:93: error: cannot find symbol
+          Button quitBtn = new Button("Quit");
+          ^
+    symbol:   class Button
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:93: error: cannot find symbol
+          Button quitBtn = new Button("Quit");
+                               ^
+    symbol:   class Button
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:100: error: cannot find symbol
+              Platform.exit();
+              ^
+    symbol:   variable Platform
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:104: error: cannot find symbol
+          BorderPane root = new BorderPane();
+          ^
+    symbol:   class BorderPane
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:104: error: cannot find symbol
+          BorderPane root = new BorderPane();
+                                ^
+    symbol:   class BorderPane
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:105: error: cannot find symbol
+          HBox topLeftBox = new HBox(quitBtn);
+          ^
+    symbol:   class HBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:105: error: cannot find symbol
+          HBox topLeftBox = new HBox(quitBtn);
+                                ^
+    symbol:   class HBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:106: error: cannot find symbol
+          topLeftBox.setAlignment(Pos.TOP_LEFT);
+                                  ^
+    symbol:   variable Pos
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:110: error: cannot find symbol
+          VBox centerLayout = new VBox(15, title, subtitle, playBtn);
+          ^
+    symbol:   class VBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:110: error: cannot find symbol
+          VBox centerLayout = new VBox(15, title, subtitle, playBtn);
+                                  ^
+    symbol:   class VBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:111: error: cannot find symbol
+          centerLayout.setAlignment(Pos.TOP_CENTER);
+                                    ^
+    symbol:   variable Pos
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:115: error: cannot find symbol
+          Scene scene = new Scene(root, 450, 300);
+          ^
+    symbol:   class Scene
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:115: error: cannot find symbol
+          Scene scene = new Scene(root, 450, 300);
+                            ^
+    symbol:   class Scene
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:131: error: cannot find symbol
+          Stage progressStage = new Stage();
+          ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:131: error: cannot find symbol
+          Stage progressStage = new Stage();
+                                    ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:132: error: cannot find symbol
+          progressStage.initModality(Modality.APPLICATION_MODAL);
+                                     ^
+    symbol:   variable Modality
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:138: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+              ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:138: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                               ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:145: error: cannot find symbol
+          Label progressLabel = new Label("Initializing...");
+          ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:145: error: cannot find symbol
+          Label progressLabel = new Label("Initializing...");
+                                    ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:146: error: cannot find symbol
+          progressLabel.setFont(Font.font("Arial", 14));
+                                ^
+    symbol:   variable Font
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:148: error: cannot find symbol
+          ProgressBar progressBar = new ProgressBar(0);
+          ^
+    symbol:   class ProgressBar
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:148: error: cannot find symbol
+          ProgressBar progressBar = new ProgressBar(0);
+                                        ^
+    symbol:   class ProgressBar
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:151: error: cannot find symbol
+          DoubleProperty progressProperty = new SimpleDoubleProperty(0.0);
+          ^
+    symbol:   class DoubleProperty
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:151: error: cannot find symbol
+          DoubleProperty progressProperty = new SimpleDoubleProperty(0.0);
+                                                ^
+    symbol:   class SimpleDoubleProperty
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:154: error: cannot find symbol
+          VBox layout = new VBox(15, progressLabel, progressBar);
+          ^
+    symbol:   class VBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:154: error: cannot find symbol
+          VBox layout = new VBox(15, progressLabel, progressBar);
+                            ^
+    symbol:   class VBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:155: error: cannot find symbol
+          layout.setAlignment(Pos.CENTER);
+                              ^
+    symbol:   variable Pos
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:158: error: cannot find symbol
+          Scene scene = new Scene(layout, 350, 150);
+          ^
+    symbol:   class Scene
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:158: error: cannot find symbol
+          Scene scene = new Scene(layout, 350, 150);
+                            ^
+    symbol:   class Scene
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:182: error: cannot find symbol
+              Platform.runLater(() -> {
+              ^
+    symbol:   variable Platform
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:197: error: cannot find symbol
+                                  Platform.exit();
+                                  ^
+    symbol:   variable Platform
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:209: error: cannot find symbol
+                      Platform.exit();
+                      ^
+    symbol:   variable Platform
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:216: error: cannot find symbol
+              Platform.runLater(() -> {
+              ^
+    symbol:   variable Platform
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:222: error: cannot find symbol
+                  Platform.exit();
+                  ^
+    symbol:   variable Platform
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:237: error: cannot find symbol
+          Stage alertStage = new Stage();
+          ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:237: error: cannot find symbol
+          Stage alertStage = new Stage();
+                                 ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:238: error: cannot find symbol
+          alertStage.initModality(Modality.APPLICATION_MODAL);
+                                  ^
+    symbol:   variable Modality
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:242: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+              ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:242: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                               ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:249: error: cannot find symbol
+          Label msgLabel = new Label(message);
+          ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:249: error: cannot find symbol
+          Label msgLabel = new Label(message);
+                               ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:251: error: cannot find symbol
+          msgLabel.setAlignment(Pos.CENTER);
+                                ^
+    symbol:   variable Pos
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:254: error: cannot find symbol
+          Button okButton = new Button("OK");
+          ^
+    symbol:   class Button
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:254: error: cannot find symbol
+          Button okButton = new Button("OK");
+                                ^
+    symbol:   class Button
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:257: error: cannot find symbol
+          VBox layout = new VBox(15, msgLabel, okButton);
+          ^
+    symbol:   class VBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:257: error: cannot find symbol
+          VBox layout = new VBox(15, msgLabel, okButton);
+                            ^
+    symbol:   class VBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:258: error: cannot find symbol
+          layout.setAlignment(Pos.CENTER);
+                              ^
+    symbol:   variable Pos
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:260: error: cannot find symbol
+          Scene scene = new Scene(layout, 400, 180);
+          ^
+    symbol:   class Scene
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:260: error: cannot find symbol
+          Scene scene = new Scene(layout, 400, 180);
+                            ^
+    symbol:   class Scene
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:270: error: cannot find symbol
+          Stage errorWindow = new Stage();
+          ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:270: error: cannot find symbol
+          Stage errorWindow = new Stage();
+                                  ^
+    symbol:   class Stage
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:271: error: cannot find symbol
+          errorWindow.initModality(Modality.APPLICATION_MODAL);
+                                   ^
+    symbol:   variable Modality
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:276: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+              ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:276: error: cannot find symbol
+              Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+                               ^
+    symbol:   class Image
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:283: error: cannot find symbol
+          Label errorMessage = new Label("This is a placeholder error because nothing has been developed yet!");
+          ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:283: error: cannot find symbol
+          Label errorMessage = new Label("This is a placeholder error because nothing has been developed yet!");
+                                   ^
+    symbol:   class Label
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:286: error: cannot find symbol
+          errorMessage.setAlignment(Pos.CENTER);
+                                    ^
+    symbol:   variable Pos
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:288: error: cannot find symbol
+          VBox errorLayout = new VBox(10, errorMessage);
+          ^
+    symbol:   class VBox
+    location: class UI
+  /Users/arthur/GitHub/Breach_In_The_Containment/launcher_client/src/main/java/org/breachinthecontainment/launcher_client/UI.java:288: error: cannot find symbol
+          VBox errorLayout = new VBox(10, errorMessage);
+                                 ^
+    symbol:   class VBox
+    location: class UI
+  100 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights.
+
+BUILD FAILED in 1s
+2 actionable tasks: 2 executed

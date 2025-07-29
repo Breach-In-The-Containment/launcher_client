@@ -1,0 +1,43 @@
+plugins {
+    id 'application'
+    id 'org.panteleyev.jpackageplugin' version '1.7.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'org.breachinthecontainment.launcher_client.Main'
+    applicationName = 'BreachInTheContainmentLauncher'
+}
+
+jpackage {
+    appName = "BreachInTheContainmentInstaller"
+    appVersion = "0.0.1"
+    vendor = "Breach In The Containment"
+    destination = "$buildDir/jpackage"
+    input = "$buildDir/libs"
+    mainJar = "${application.applicationName}.jar"
+    mainClass = application.mainClass
+
+    arguments = [
+            "--strip-debug",
+            "--compress", "2",
+            "--no-header-files",
+            "--no-man-pages",
+            "--add-modules", "javafx.controls,javafx.graphics,javafx.base,java.logging,java.net.http,java.desktop",
+            "--mac-bundle-identifier", "org.breachinthecontainment.launcher" // ✅ Moved here
+    ]
+}
+
+
+
+dependencies {
+    implementation 'org.openjfx:javafx-controls:20'
+    implementation 'org.openjfx:javafx-graphics:20'
+    implementation 'org.openjfx:javafx-base:20'
+    implementation 'org.json:json:20231013'
+}
+
+jpackage.dependsOn build

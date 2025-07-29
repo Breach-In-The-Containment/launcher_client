@@ -1,3 +1,5 @@
+// LaunchLogger.java
+
 package org.breachinthecontainment.launcher_client;
 
 import java.io.BufferedWriter;

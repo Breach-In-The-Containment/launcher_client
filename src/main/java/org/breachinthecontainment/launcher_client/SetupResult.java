@@ -1,3 +1,5 @@
+// SetupResult.java
+
 package org.breachinthecontainment.launcher_client;
 
 /**

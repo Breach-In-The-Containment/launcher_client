@@ -1,0 +1,99 @@
+// build.gradle.kts
+
+import org.gradle.kotlin.dsl.*
+import org.panteleyev.gradle.jpackage.JPackageTask
+
+plugins {
+    application
+    id("org.panteleyev.jpackageplugin") version "1.7.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass.set("org.breachinthecontainment.launcher_client.Main")
+    applicationName = "BreachInTheContainmentLauncher"
+}
+
+val commonModules = listOf(
+    "javafx.controls",
+    "javafx.graphics",
+    "javafx.base",
+    "java.logging",
+    "java.net.http",
+    "java.desktop"
+)
+
+val commonJlinkOptions = listOf(
+    "--strip-debug",
+    "--compress", "2",
+    "--no-header-files",
+    "--no-man-pages"
+)
+
+val appName = "BreachInTheContainmentInstaller"
+val appVersion = "0.0.1"
+val vendor = "Breach In The Containment"
+val mainJar = "${application.applicationName}.jar"
+val mainClassName = application.mainClass.get()
+
+// macOS
+tasks.register<JPackageTask>("jpackageMac") {
+    dependsOn("build")
+    appName.set(appName)
+    appVersion.set(appVersion)
+    vendor.set(vendor)
+    mainJar.set(mainJar)
+    mainClass.set(mainClassName)
+    modules.set(commonModules)
+    jlinkOptions.set(commonJlinkOptions)
+    destination.set(file("${buildDir}/jpackage/mac"))
+
+    mac {
+        icon.set(file("src/main/resources/icon.icns"))
+        bundleId.set("org.breachinthecontainment.launcher")
+    }
+}
+
+// Linux
+tasks.register<JPackageTask>("jpackageLinux") {
+    dependsOn("build")
+    appName.set(appName)
+    appVersion.set(appVersion)
+    vendor.set(vendor)
+    mainJar.set(mainJar)
+    mainClass.set(mainClassName)
+    modules.set(commonModules)
+    jlinkOptions.set(commonJlinkOptions)
+    destination.set(file("${buildDir}/jpackage/linux"))
+
+    linux {
+        icon.set(file("src/main/resources/icon.png"))
+    }
+}
+
+// Windows
+tasks.register<JPackageTask>("jpackageWin") {
+    dependsOn("build")
+    appName.set(appName)
+    appVersion.set(appVersion)
+    vendor.set(vendor)
+    mainJar.set(mainJar)
+    mainClass.set(mainClassName)
+    modules.set(commonModules)
+    jlinkOptions.set(commonJlinkOptions)
+    destination.set(file("${buildDir}/jpackage/win"))
+
+    win {
+        icon.set(file("src/main/resources/icon.ico"))
+    }
+}
+
+dependencies {
+    implementation("org.openjfx:javafx-controls:20")
+    implementation("org.openjfx:javafx-graphics:20")
+    implementation("org.openjfx:javafx-base:20")
+    implementation("org.json:json:20231013")
+}
