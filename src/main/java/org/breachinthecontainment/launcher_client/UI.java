@@ -1,5 +1,3 @@
-// Ignore all errors.
-
 package org.breachinthecontainment.launcher_client;
 
 import javafx.application.Platform;
@@ -15,7 +13,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class UI { // Does not extend Application
+import java.io.InputStream;
+
+public class UI {
 
     private static LauncherLogger logger;
 
@@ -26,7 +26,7 @@ public class UI { // Does not extend Application
     /**
      * Entry point for the UI application flow.
      * This method is called from Main.java after JavaFX is initialized.
-     * It initiates the local setup (data.zip extraction) or proceeds to the main window.
+     * It verifies the embedded data.zip checksum before continuing setup.
      * @param primaryStage The primary stage provided by JavaFX.
      * @param launcherDirectory The application's installation directory.
      * @param appLogger The logger instance.
@@ -34,28 +34,58 @@ public class UI { // Does not extend Application
     public static void startApplicationFlow(Stage primaryStage, String launcherDirectory, LauncherLogger appLogger) {
         logger = appLogger;
 
-        // Perform the setup (extraction) directly
-        logger.log("UI.startApplicationFlow: Initiating local setup (data.zip extraction).");
-        boolean setupSuccess = Installer.setup(launcherDirectory, logger); // Installer.setup now returns boolean
+        logger.log("UI.startApplicationFlow: Verifying embedded data.zip checksum.");
 
-        if (setupSuccess) {
-            logger.log("UI.startApplicationFlow: Local setup completed successfully. Displaying main window.");
-            showMainWindow(primaryStage);
-        } else {
-            logger.log("UI.startApplicationFlow: Local setup failed. Showing error and exiting.");
-            showSimpleAlertDialog("Setup Failed", "Failed to prepare game data. Please check logs for details.", appLogger);
-            if (logger != null) logger.close();
-            Platform.exit();
-            System.exit(0);
+        // Load data.zip from resources as InputStream
+        try (InputStream dataZipStream = UI.class.getResourceAsStream("/data.zip")) {
+            if (dataZipStream == null) {
+                logger.log("Failed to find data.zip resource.");
+                showSimpleAlertDialog("Setup Failed", "data.zip resource not found.", logger);
+                cleanExit();
+                return;
+            }
+
+            String checksum = SumChecker.calculateSHA256(dataZipStream);
+            logger.log("Calculated checksum for embedded data.zip: " + checksum);
+
+            if (!checksum.equalsIgnoreCase(SumChecker.EXPECTED_CHECKSUM)) {
+                logger.log("Checksum mismatch! Data integrity verification failed.");
+                showSimpleAlertDialog("Setup Failed", "Embedded data.zip checksum mismatch. Setup aborted.", logger);
+                cleanExit();
+                return;
+            }
+
+            logger.log("Checksum verified successfully. Proceeding with setup.");
+
+            // Now call your Installer.setup() method which extracts the data.zip from resources to launcherDirectory
+            boolean setupSuccess = Installer.setup(launcherDirectory, logger);
+            if (setupSuccess) {
+                logger.log("Setup completed successfully. Showing main window.");
+                showMainWindow(primaryStage);
+            } else {
+                logger.log("Setup failed. Showing error and exiting.");
+                showSimpleAlertDialog("Setup Failed", "Failed to prepare game data. Please check logs for details.", logger);
+                cleanExit();
+            }
+        } catch (Exception e) {
+            logger.log("Exception during checksum verification: " + e.getMessage());
+            e.printStackTrace();
+            showSimpleAlertDialog("Setup Failed", "Error verifying data.zip checksum: " + e.getMessage(), logger);
+            cleanExit();
         }
     }
 
-    /**
-     * Initializes and displays the main application window.
-     * @param stage The primary stage to configure and show.
-     */
+    private static void cleanExit() {
+        if (logger != null) {
+            logger.close();
+        }
+        Platform.exit();
+        System.exit(0);
+    }
+
+    // ... (rest of the UI methods remain the same) ...
+
     public static void showMainWindow(Stage stage) {
-        // Set the common close request handler for the primary stage
         stage.setOnCloseRequest(event -> {
             if (logger != null) {
                 logger.log("Main application window closed via X button. Shutting down.");
@@ -65,7 +95,6 @@ public class UI { // Does not extend Application
             System.exit(0);
         });
 
-        // Add application icon
         try {
             Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
             stage.getIcons().add(icon);
@@ -116,12 +145,6 @@ public class UI { // Does not extend Application
         logger.log("Main application window shown.");
     }
 
-    /**
-     * Displays a simple alert dialog.
-     * @param title The title of the alert.
-     * @param message The message to display.
-     * @param appLogger The logger instance.
-     */
     private static void showSimpleAlertDialog(String title, String message, LauncherLogger appLogger) {
         Stage alertStage = new Stage();
         alertStage.initModality(Modality.APPLICATION_MODAL);
@@ -151,10 +174,6 @@ public class UI { // Does not extend Application
         alertStage.showAndWait();
     }
 
-    /**
-     * Displays a placeholder error window.
-     * @param ownerStage The parent stage.
-     */
     private static void showPlaceholderErrorWindow(Stage ownerStage) {
         Stage errorWindow = new Stage();
         errorWindow.initModality(Modality.APPLICATION_MODAL);

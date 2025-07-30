@@ -69,7 +69,12 @@ public class Installer {
             // Extract the bundled data.zip from the application's resources
             logger.log("Attempting to extract bundled data.zip from application resources.");
             extractZipFromResources(DATA_ZIP_RESOURCE_PATH, outputDir, logger);
-            logger.log("Extraction complete!");
+            File extractedCheck = Paths.get(outputDir, "*.*").toFile();
+            if (extractedCheck.exists()) {
+                logger.log("Extraction verified. Found: " + extractedCheck.getAbsolutePath());
+            } else {
+                logger.log("Extraction MAY have failed — expected file not found.");
+            }
             return true;
 
         } catch (IOException e) {
@@ -89,31 +94,34 @@ public class Installer {
      * @throws IOException If an I/O error occurs during extraction.
      */
     private static void extractZipFromResources(String resourcePath, String outputDir, LauncherLogger logger) throws IOException {
-        // Use Installer.class.getResourceAsStream to get the InputStream for the bundled resource
-        try (InputStream stream = Installer.class.getResourceAsStream(resourcePath);
-             ZipInputStream zis = new ZipInputStream(stream)) {
+        logger.log("Attempting to load resource: " + resourcePath);
 
-            if (stream == null) {
-                String error = "Resource not found in application bundle: " + resourcePath + ". Ensure data.zip is in src/main/resources.";
-                logger.log(error);
-                throw new IOException(error);
-            }
+        InputStream stream = Installer.class.getResourceAsStream(resourcePath);
+        if (stream == null) {
+            logger.log("getResourceAsStream failed. Trying with ClassLoader...");
+            stream = Installer.class.getClassLoader().getResourceAsStream(resourcePath.startsWith("/") ? resourcePath.substring(1) : resourcePath);
+        }
 
+        if (stream == null) {
+            String error = "Resource not found: " + resourcePath + ". Ensure data.zip is inside src/main/resources.";
+            logger.log(error);
+            throw new IOException(error);
+        }
+
+        try (ZipInputStream zis = new ZipInputStream(stream)) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 Path newFilePath = Paths.get(outputDir, entry.getName());
-                logger.log("Extracting entry: " + entry.getName());
+                logger.log("Extracting: " + entry.getName());
 
                 if (entry.isDirectory()) {
-                    if (!Files.exists(newFilePath)) {
-                        Files.createDirectories(newFilePath);
-                        logger.log("Created directory: " + newFilePath.toAbsolutePath());
-                    }
+                    Files.createDirectories(newFilePath);
+                    logger.log("Created directory: " + newFilePath.toAbsolutePath());
                 } else {
                     Path parent = newFilePath.getParent();
                     if (parent != null && !Files.exists(parent)) {
                         Files.createDirectories(parent);
-                        logger.log("Created parent directory: " + parent.toAbsolutePath());
+                        logger.log("Created parent dir: " + parent.toAbsolutePath());
                     }
 
                     try (FileOutputStream fos = new FileOutputStream(newFilePath.toFile())) {
@@ -122,13 +130,16 @@ public class Installer {
                         while ((length = zis.read(buffer)) > 0) {
                             fos.write(buffer, 0, length);
                         }
-                        logger.log("Extracted file: " + newFilePath.toAbsolutePath());
                     }
+
+                    logger.log("Extracted file: " + newFilePath.toAbsolutePath());
                 }
+
                 zis.closeEntry();
             }
         }
     }
+
 
     /**
      * Deletes a directory and all its contents recursively.
