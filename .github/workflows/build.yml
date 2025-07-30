@@ -52,14 +52,18 @@ jobs:
         if: runner.os != 'Windows'
         run: chmod +x ./gradlew
 
-      - name: Build and package ${{ matrix.installerType }}
-        # The installerType is now directly passed from the matrix
-        run: ./gradlew clean jlink jpackage -PinstallerType=${{ matrix.installerType }}
+      - name: Build and package ${{ matrix.installerType }} (${{ matrix.arch }})
+        # Pass the installerType and arch to Gradle.
+        # Your build.gradle must be configured to use these properties.
+        run: ./gradlew clean jlink jpackage -PinstallerType=${{ matrix.installerType }} -Parch=${{ matrix.arch }}
 
       - name: Upload installer artifact
         # Updated to v4 to resolve deprecation warning
         uses: actions/upload-artifact@v4
         with:
-          # Name the artifact uniquely using both OS and installer type
-          name: EspressoLauncher-${{ matrix.os }}-${{ matrix.installerType }}
-          path: build/jpackage/
+          # Name the artifact uniquely using the 'name' from the matrix
+          name: EspressoLauncher-${{ matrix.name }}
+          # The path should also be unique if jpackage outputs different architectures to the same base directory.
+          # You might need to modify your Gradle build (build.gradle) to output to a path like:
+          # path: build/jpackage/${{ matrix.arch }}/
+          path: build/jpackage/ # Keep this as is if jpackage handles unique subdirectories internally
