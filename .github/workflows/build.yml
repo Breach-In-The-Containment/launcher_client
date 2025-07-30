@@ -17,16 +17,20 @@ jobs:
         include:
           - os: ubuntu-latest
             installerType: deb
+            arch: amd64
           - os: ubuntu-latest
             installerType: rpm
+            arch: amd64
           - os: windows-latest
             installerType: exe
+            arch: amd64
           - os: macos-latest
             installerType: dmg
             arch: arm64
-          -os: macos-latest
+          - os: macos-latest
             installerType: dmg
-            arch: amg64
+            arch: amd64
+
 
     steps:
       - name: Checkout repo
