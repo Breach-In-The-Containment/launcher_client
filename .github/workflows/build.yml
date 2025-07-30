@@ -16,18 +16,23 @@ jobs:
         # Define the combinations of OS and installer types
         include:
           - os: ubuntu-latest
+            name: linux-deb
             installerType: deb
             arch: amd64
           - os: ubuntu-latest
+            name: linux-rpm
             installerType: rpm
             arch: amd64
           - os: windows-latest
+            name: windows
             installerType: exe
             arch: amd64
           - os: macos-latest
+            name: macOS-arm64
             installerType: dmg
             arch: arm64
           - os: macos-latest
+            name: macOS-amd64
             installerType: dmg
             arch: amd64
 
