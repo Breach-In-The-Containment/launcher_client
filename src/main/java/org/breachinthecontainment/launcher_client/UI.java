@@ -108,7 +108,7 @@ public class UI { // Does not extend Application
         root.setCenter(centerLayout);
 
         Scene scene = new Scene(root, 450, 300);
-        stage.setTitle("Modpack Loader");
+        stage.setTitle("Espresso Loader");
         stage.setScene(scene);
         stage.show();
         logger.log("Main application window shown.");
