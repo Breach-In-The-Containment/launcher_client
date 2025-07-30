@@ -18,15 +18,15 @@ jobs:
           - os: ubuntu-latest
             name: linux-deb
             installerType: deb
-            arch: amd64
+            arch: x64
           - os: ubuntu-latest
             name: linux-rpm
             installerType: rpm
-            arch: amd64
+            arch: x64
           - os: windows-latest
             name: windows
             installerType: exe
-            arch: amd64
+            arch: x64
           - os: macos-latest
             name: macOS-arm64
             installerType: dmg
@@ -34,7 +34,7 @@ jobs:
           - os: macos-latest
             name: macOS-amd64
             installerType: dmg
-            arch: amd64
+            arch: x64
 
 
     steps:
