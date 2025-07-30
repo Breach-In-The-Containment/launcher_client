@@ -8,11 +8,21 @@ on:
 
 jobs:
   build:
-
+    # Use a dynamic runner based on the matrix OS
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # Define the combinations of OS and installer types
+        include:
+          - os: ubuntu-latest
+            installerType: deb
+          - os: ubuntu-latest
+            installerType: rpm
+          - os: windows-latest
+            installerType: exe
+          - os: macos-latest
+            installerType: dmg
 
     steps:
       - name: Checkout repo
@@ -25,22 +35,17 @@ jobs:
           java-version: '21'
 
       - name: Grant execute permission for gradlew (Linux & macOS)
+        # This step runs only if the runner OS is not Windows
         if: runner.os != 'Windows'
         run: chmod +x ./gradlew
 
-      - name: Build and package
-        run: |
-          # Set installer type per OS
-          if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
-            ./gradlew clean jlink jpackage -PinstallerType=deb
-          elif [ "${{ matrix.os }}" == "windows-latest" ]; then
-            ./gradlew clean jlink jpackage -PinstallerType=exe
-          else
-            ./gradlew clean jlink jpackage -PinstallerType=dmg
-          fi
+      - name: Build and package ${{ matrix.installerType }}
+        # The installerType is now directly passed from the matrix
+        run: ./gradlew clean jlink jpackage -PinstallerType=${{ matrix.installerType }}
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v3
         with:
-          name: EspressoLauncher-${{ matrix.os }}
+          # Name the artifact uniquely using both OS and installer type
+          name: EspressoLauncher-${{ matrix.os }}-${{ matrix.installerType }}
           path: build/jpackage/
