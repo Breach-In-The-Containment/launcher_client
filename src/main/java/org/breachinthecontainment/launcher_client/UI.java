@@ -23,20 +23,11 @@ public class UI {
         logger = appLogger;
     }
 
-    /**
-     * Entry point for the UI application flow.
-     * This method is called from Main.java after JavaFX is initialized.
-     * It verifies the embedded data.zip checksum before continuing setup.
-     * @param primaryStage The primary stage provided by JavaFX.
-     * @param launcherDirectory The application's installation directory.
-     * @param appLogger The logger instance.
-     */
     public static void startApplicationFlow(Stage primaryStage, String launcherDirectory, LauncherLogger appLogger) {
         logger = appLogger;
 
         logger.log("UI.startApplicationFlow: Verifying embedded data.zip checksum.");
 
-        // Load data.zip from resources as InputStream
         try (InputStream dataZipStream = UI.class.getResourceAsStream("/data.zip")) {
             if (dataZipStream == null) {
                 logger.log("Failed to find data.zip resource.");
@@ -57,7 +48,6 @@ public class UI {
 
             logger.log("Checksum verified successfully. Proceeding with setup.");
 
-            // Now call your Installer.setup() method which extracts the data.zip from resources to launcherDirectory
             boolean setupSuccess = Installer.setup(launcherDirectory, logger);
             if (setupSuccess) {
                 logger.log("Setup completed successfully. Showing main window.");
@@ -83,9 +73,9 @@ public class UI {
         System.exit(0);
     }
 
-    // ... (rest of the UI methods remain the same) ...
-
     public static void showMainWindow(Stage stage) {
+        final boolean[] isSignedIn = {false};
+
         stage.setOnCloseRequest(event -> {
             if (logger != null) {
                 logger.log("Main application window closed via X button. Shutting down.");
@@ -110,10 +100,22 @@ public class UI {
 
         Button playBtn = new Button("Play!");
         playBtn.setStyle("-fx-font-size: 16pt");
-
         playBtn.setOnAction(event -> {
-            if (logger != null) logger.log("Play button clicked. Showing placeholder error.");
-            showPlaceholderErrorWindow(stage);
+            if (!isSignedIn[0]) {
+                showMicrosoftAccountErrorDialog();
+            } else {
+                if (logger != null) logger.log("Play button clicked. User is signed in.");
+                showPlaceholderErrorWindow(stage);
+            }
+        });
+
+        Button signInBtn = new Button("Sign In");
+        signInBtn.setStyle("-fx-font-size: 12pt");
+        signInBtn.setOnAction(event -> {
+            logger.log("Sign-In button clicked.");
+            // Placeholder toggling for sign-in
+            isSignedIn[0] = true;
+            showSignedInSuccessDialog(isSignedIn[0]);
         });
 
         Button quitBtn = new Button("Quit");
@@ -127,15 +129,15 @@ public class UI {
             System.exit(0);
         });
 
+        VBox centerLayout = new VBox(15, title, subtitle, playBtn, signInBtn);
+        centerLayout.setAlignment(Pos.TOP_CENTER);
+        centerLayout.setStyle("-fx-padding: 30;");
+
         BorderPane root = new BorderPane();
         HBox topLeftBox = new HBox(quitBtn);
         topLeftBox.setAlignment(Pos.TOP_LEFT);
         topLeftBox.setStyle("-fx-padding: 10;");
         root.setTop(topLeftBox);
-
-        VBox centerLayout = new VBox(15, title, subtitle, playBtn);
-        centerLayout.setAlignment(Pos.TOP_CENTER);
-        centerLayout.setStyle("-fx-padding: 30;");
         root.setCenter(centerLayout);
 
         Scene scene = new Scene(root, 450, 300);
@@ -150,7 +152,6 @@ public class UI {
             case LIGHT -> "/styles/light.css";
         };
         scene.getStylesheets().add(UI.class.getResource(stylesheet).toExternalForm());
-
     }
 
     private static void showSimpleAlertDialog(String title, String message, LauncherLogger appLogger) {
@@ -210,4 +211,63 @@ public class UI {
         errorWindow.showAndWait();
     }
 
+    private static void showSignedInSuccessDialog(boolean isSignedIn) {
+        Stage signedInStage = new Stage();
+        signedInStage.initModality(Modality.APPLICATION_MODAL);
+        signedInStage.setTitle("Microsoft Sign-In");
+
+        try {
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+            signedInStage.getIcons().add(icon);
+        } catch (Exception e) {
+            if (logger != null) logger.log("Failed to load icon for sign-in dialog: " + e.getMessage());
+        }
+
+        String messageText = isSignedIn
+                ? "You are connected to Microsoft!"
+                : "You are NOT connected to Microsoft.";
+
+        Label message = new Label(messageText);
+        message.setWrapText(true);
+
+        Button okButton = new Button("OK");
+        okButton.setOnAction(e -> signedInStage.close());
+
+        VBox layout = new VBox(15, message, okButton);
+        layout.setAlignment(Pos.CENTER);
+        layout.setStyle("-fx-padding: 20;");
+        Scene scene = new Scene(layout, 300, 140);
+        signedInStage.setScene(scene);
+        signedInStage.showAndWait();
+    }
+
+    private static void showMicrosoftAccountErrorDialog() {
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setTitle("Microsoft Account Error");
+
+        try {
+            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
+            dialog.getIcons().add(icon);
+        } catch (Exception e) {
+            if (logger != null) logger.log("Failed to load icon for account error dialog: " + e.getMessage());
+        }
+
+        Label message = new Label(
+                "You need to connect to your Microsoft account to verify that you actually have Minecraft.\n\n" +
+                        "Please press the \"Sign In\" button and sign into your Microsoft account.\n\n" +
+                        "WARNING: Your data is not logged. It's only to prevent illegal copies of Minecraft Java Edition 1.12.2."
+        );
+        message.setWrapText(true);
+
+        Button okButton = new Button("OK");
+        okButton.setOnAction(e -> dialog.close());
+
+        VBox layout = new VBox(15, message, okButton);
+        layout.setAlignment(Pos.CENTER);
+        layout.setStyle("-fx-padding: 20;");
+        Scene scene = new Scene(layout, 420, 220);
+        dialog.setScene(scene);
+        dialog.showAndWait();
+    }
 }
