@@ -143,6 +143,14 @@ public class UI {
         stage.setScene(scene);
         stage.show();
         logger.log("Main application window shown.");
+
+        Theme.Mode mode = Theme.detectSystemTheme();
+        String stylesheet = switch (mode) {
+            case DARK -> "/styles/dark.css";
+            case LIGHT -> "/styles/light.css";
+        };
+        scene.getStylesheets().add(UI.class.getResource(stylesheet).toExternalForm());
+
     }
 
     private static void showSimpleAlertDialog(String title, String message, LauncherLogger appLogger) {
@@ -201,4 +209,5 @@ public class UI {
         errorWindow.setScene(errorScene);
         errorWindow.showAndWait();
     }
+
 }
