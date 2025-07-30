@@ -23,6 +23,10 @@ jobs:
             installerType: exe
           - os: macos-latest
             installerType: dmg
+            arch: arm64
+          -os: macos-latest
+            installerType: dmg
+            arch: amg64
 
     steps:
       - name: Checkout repo
