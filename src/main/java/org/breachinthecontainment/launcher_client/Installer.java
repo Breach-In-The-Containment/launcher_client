@@ -68,7 +68,8 @@ public class Installer {
 
             // Extract the bundled data.zip from the application's resources
             logger.log("Attempting to extract bundled data.zip from application resources.");
-            extractZipFromResources(DATA_ZIP_RESOURCE_PATH, outputDir, logger);
+            Path dataSubdir = Paths.get(outputDir, "data");
+            extractZipFromResources(DATA_ZIP_RESOURCE_PATH, dataSubdir.toString(), logger);
             File extractedCheck = Paths.get(outputDir, "*.*").toFile();
             if (extractedCheck.exists()) {
                 logger.log("Extraction verified. Found: " + extractedCheck.getAbsolutePath());
