@@ -44,7 +44,8 @@ jobs:
         run: ./gradlew clean jlink jpackage -PinstallerType=${{ matrix.installerType }}
 
       - name: Upload installer artifact
-        uses: actions/upload-artifact@v3
+        # Updated to v4 to resolve deprecation warning
+        uses: actions/upload-artifact@v4
         with:
           # Name the artifact uniquely using both OS and installer type
           name: EspressoLauncher-${{ matrix.os }}-${{ matrix.installerType }}
