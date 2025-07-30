@@ -1,11 +1,9 @@
-// Main.java
-
 package org.breachinthecontainment.launcher_client;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class Main extends Application { // Main now extends Application
+public class Main extends Application { // Main extends Application
 
     private static LauncherLogger logger;
     private static String launcherDir;

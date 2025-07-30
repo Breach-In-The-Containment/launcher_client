@@ -1,16 +1,10 @@
-// UI.java
-
 package org.breachinthecontainment.launcher_client;
 
-// Removed import javafx.application.Application; as UI no longer extends it
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -19,9 +13,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.function.Consumer;
-
-public class UI { // No longer extends Application
+public class UI { // Does not extend Application
 
     private static LauncherLogger logger;
 
@@ -29,12 +21,10 @@ public class UI { // No longer extends Application
         logger = appLogger;
     }
 
-    // The start(Stage primaryStage) method is removed from UI.java
-    // as Main.java now handles the Application lifecycle.
-
     /**
-     * Entry point for the UI application flow, determining whether to show setup or main window.
+     * Entry point for the UI application flow.
      * This method is called from Main.java after JavaFX is initialized.
+     * It initiates the local setup (data.zip extraction) or proceeds to the main window.
      * @param primaryStage The primary stage provided by JavaFX.
      * @param launcherDirectory The application's installation directory.
      * @param appLogger The logger instance.
@@ -42,30 +32,35 @@ public class UI { // No longer extends Application
     public static void startApplicationFlow(Stage primaryStage, String launcherDirectory, LauncherLogger appLogger) {
         logger = appLogger;
 
-        if (Installer.isFirstLaunch(launcherDirectory, logger)) {
-            logger.log("UI.startApplicationFlow: First launch detected. Initiating setup flow.");
-            startSetupFlow(primaryStage, launcherDirectory, logger);
-        } else {
-            logger.log("UI.startApplicationFlow: Not first launch. Displaying main window directly.");
+        // Perform the setup (extraction) directly
+        logger.log("UI.startApplicationFlow: Initiating local setup (data.zip extraction).");
+        boolean setupSuccess = Installer.setup(launcherDirectory, logger); // Installer.setup now returns boolean
+
+        if (setupSuccess) {
+            logger.log("UI.startApplicationFlow: Local setup completed successfully. Displaying main window.");
             showMainWindow(primaryStage);
+        } else {
+            logger.log("UI.startApplicationFlow: Local setup failed. Showing error and exiting.");
+            showSimpleAlertDialog("Setup Failed", "Failed to prepare game data. Please check logs for details.", appLogger);
+            if (logger != null) logger.close();
+            Platform.exit();
+            System.exit(0);
         }
     }
 
     /**
      * Initializes and displays the main application window.
-     * This method is called directly if not a first launch, or after setup completes.
      * @param stage The primary stage to configure and show.
      */
     public static void showMainWindow(Stage stage) {
-        // Set the common close request handler for the primary stage here,
-        // as this is where the primary stage is actually shown.
+        // Set the common close request handler for the primary stage
         stage.setOnCloseRequest(event -> {
             if (logger != null) {
                 logger.log("Main application window closed via X button. Shutting down.");
-                logger.close(); // Ensure logs are saved
+                logger.close();
             }
-            Platform.exit(); // Exit the JavaFX application
-            System.exit(0); // Ensure JVM exits
+            Platform.exit();
+            System.exit(0);
         });
 
         // Add application icon
@@ -117,114 +112,6 @@ public class UI { // No longer extends Application
         stage.setScene(scene);
         stage.show();
         logger.log("Main application window shown.");
-    }
-
-    /**
-     * Initiates the first-launch setup flow, showing a progress window first.
-     * @param ownerStage The primary stage of the application, which will be hidden temporarily.
-     * @param launcherDirectory The directory path for setup.
-     * @param appLogger The logger instance.
-     */
-    public static void startSetupFlow(Stage ownerStage, String launcherDirectory, LauncherLogger appLogger) {
-        ownerStage.hide();
-
-        Stage progressStage = new Stage();
-        progressStage.initModality(Modality.APPLICATION_MODAL);
-        progressStage.initOwner(ownerStage);
-        progressStage.setTitle("First Launch Setup");
-        progressStage.setResizable(false);
-
-        try {
-            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
-            progressStage.getIcons().add(icon);
-        } catch (Exception e) {
-            System.err.println("Failed to load icon for progress window: " + e.getMessage());
-            if (logger != null) logger.log("Failed to load progress window icon: " + e.getMessage());
-        }
-
-        Label progressLabel = new Label("Initializing...");
-        progressLabel.setFont(Font.font("Arial", 14));
-
-        ProgressBar progressBar = new ProgressBar(0);
-        progressBar.setPrefWidth(300);
-
-        DoubleProperty progressProperty = new SimpleDoubleProperty(0.0);
-        progressBar.progressProperty().bind(progressProperty);
-
-        VBox layout = new VBox(15, progressLabel, progressBar);
-        layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-padding: 20;");
-
-        Scene scene = new Scene(layout, 350, 150);
-        progressStage.setScene(scene);
-        progressStage.show();
-
-        javafx.concurrent.Task<Installer.SetupResult> setupTask = new javafx.concurrent.Task<Installer.SetupResult>() {
-            @Override
-            protected Installer.SetupResult call() throws Exception {
-                Consumer<String> textProgressUpdater = message -> Platform.runLater(() -> {
-                    progressLabel.setText(message);
-                });
-
-                Consumer<Double> percentageProgressUpdater = percentage -> Platform.runLater(() -> {
-                    if (percentage >= 0.0 && percentage <= 1.0) {
-                        progressProperty.set(percentage);
-                    } else {
-                        progressProperty.set(-1.0);
-                    }
-                });
-
-                return Installer.setup(launcherDirectory, textProgressUpdater, percentageProgressUpdater, appLogger);
-            }
-        };
-
-        setupTask.setOnSucceeded(event -> {
-            Platform.runLater(() -> {
-                Installer.SetupResult result = setupTask.getValue();
-                progressStage.close();
-
-                if (result == Installer.SetupResult.SUCCESS) {
-                    appLogger.log("First launch setup completed successfully.");
-                    showMainWindow(ownerStage);
-                } else if (result == Installer.SetupResult.MISCOUNT_ERROR) {
-                    appLogger.log("Miscount error detected after setup.");
-                    showMiscountErrorWindow(ownerStage, appLogger,
-                            () -> {
-                                if (logger != null) {
-                                    logger.log("Miscount error: Exit button clicked.");
-                                    logger.close();
-                                }
-                                Platform.exit();
-                                System.exit(0);
-                            },
-                            () -> {
-                                if (logger != null) logger.log("Miscount error: Launch Anyway button clicked.");
-                                showMainWindow(ownerStage);
-                            }
-                    );
-                } else {
-                    appLogger.log("First launch setup failed.");
-                    showSimpleAlertDialog("Setup Failed", "The initial setup encountered an error. Please check the logs for more details.", appLogger);
-                    if (logger != null) logger.close();
-                    Platform.exit();
-                    System.exit(0);
-                }
-            });
-        });
-
-        setupTask.setOnFailed(event -> {
-            Platform.runLater(() -> {
-                String errorMsg = "First launch setup failed due to unexpected exception: " + setupTask.getException().getMessage();
-                appLogger.log(errorMsg);
-                progressStage.close();
-                showSimpleAlertDialog("Setup Error", "An unexpected error occurred during setup: " + setupTask.getException().getMessage() + ". Please check the logs.", appLogger);
-                if (logger != null) logger.close();
-                Platform.exit();
-                System.exit(0);
-            });
-        });
-
-        new Thread(setupTask).start();
     }
 
     /**
@@ -292,59 +179,5 @@ public class UI { // No longer extends Application
         Scene errorScene = new Scene(errorLayout, 380, 160);
         errorWindow.setScene(errorScene);
         errorWindow.showAndWait();
-    }
-
-    /**
-     * Displays a miscount error window with "Exit" and "Launch anyway" options.
-     * @param ownerStage The parent stage (main launcher window).
-     * @param logger The logger instance.
-     * @param onExit Runnable to execute when "Exit" is clicked.
-     * @param onLaunchAnyway Runnable to execute when "Launch anyway" is clicked.
-     */
-    public static void showMiscountErrorWindow(Stage ownerStage, LauncherLogger logger, Runnable onExit, Runnable onLaunchAnyway) {
-        Stage miscountWindow = new Stage();
-        miscountWindow.initModality(Modality.APPLICATION_MODAL);
-        miscountWindow.initOwner(ownerStage);
-        miscountWindow.setTitle("Miscount error");
-        miscountWindow.setResizable(false);
-
-        try {
-            Image icon = new Image(UI.class.getResourceAsStream("/icon.png"));
-            miscountWindow.getIcons().add(icon);
-        } catch (Exception e) {
-            System.err.println("Failed to load icon for miscount window: " + e.getMessage());
-            if (logger != null) logger.log("Failed to load miscount window icon: " + e.getMessage());
-        }
-
-        Label errorMessage = new Label("Uh oh! We found a miscount error with the release and actual number of mods + configs.\nExit or Launch anyway?");
-        errorMessage.setStyle("-fx-font-size: 14px; -fx-padding: 10;");
-        errorMessage.setWrapText(true);
-        errorMessage.setAlignment(Pos.CENTER);
-
-        Button exitButton = new Button("Exit");
-        exitButton.setStyle("-fx-font-size: 14pt; -fx-padding: 8 20;");
-        exitButton.setOnAction(e -> {
-            miscountWindow.close();
-            onExit.run();
-        });
-
-        Button launchAnywayButton = new Button("Launch anyway");
-        launchAnywayButton.setStyle("-fx-font-size: 14pt; -fx-padding: 8 20;");
-        launchAnywayButton.setOnAction(e -> {
-            miscountWindow.close();
-            onLaunchAnyway.run();
-        });
-
-        HBox buttonLayout = new HBox(15, exitButton, launchAnywayButton);
-        buttonLayout.setAlignment(Pos.CENTER);
-        buttonLayout.setStyle("-fx-padding: 10;");
-
-        VBox layout = new VBox(15, errorMessage, buttonLayout);
-        layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-padding: 20;");
-
-        Scene scene = new Scene(layout, 450, 200);
-        miscountWindow.setScene(scene);
-        miscountWindow.showAndWait();
     }
 }
