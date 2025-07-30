@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 public class SumChecker {
 
     // Replace this with the actual checksum you generate for your original data.zip
-    public static final String EXPECTED_CHECKSUM = "6fbf31c2b37a54981cbc39923fd95d74c493ab56c038584caccfbc2864f8270b";
+    public static final String EXPECTED_CHECKSUM = "51d57b3cab39402eee05cf443cdf10d299328bdf5b8d6a746123110502241026";
 
     public static void main(String[] args) {
         if (args.length != 1) {
