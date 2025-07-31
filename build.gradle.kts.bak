@@ -1,4 +1,5 @@
 // build.gradle.kts
+// This is outdated. Please use Groovy instead!
 
 import org.gradle.kotlin.dsl.*
 import org.panteleyev.gradle.jpackage.JPackageTask
