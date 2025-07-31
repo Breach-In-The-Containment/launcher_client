@@ -2,9 +2,7 @@ package org.breachinthecontainment.launcher_client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
-import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
-
+import fr.litarvan.openauth.microsoft.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
