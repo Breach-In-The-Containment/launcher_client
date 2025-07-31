@@ -13,6 +13,9 @@ application {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://litarvan.github.io/maven'
+    }
 }
 
 dependencies {
@@ -20,6 +23,7 @@ dependencies {
     implementation "org.openjfx:javafx-graphics:21"
     implementation "org.openjfx:javafx-fxml:21"
     implementation "org.openjfx:javafx-base:21"
+    implementation 'fr.litarvan:openauth:1.1.3'
 }
 
 javafx {
