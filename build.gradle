@@ -1,7 +1,6 @@
 plugins {
     id 'application'
     id 'java'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'org.beryx.jlink' version '3.1.1'
 }
 
@@ -10,6 +9,7 @@ version = '1.0.0'
 
 application {
     mainClass = 'org.breachinthecontainment.launcher_client.Main'
+    mainModule = 'com.breachinthecontainment.launcher'
 }
 
 repositories {
@@ -20,91 +20,71 @@ repositories {
 }
 
 dependencies {
-    implementation "org.openjfx:javafx-controls:21"
-    implementation "org.openjfx:javafx-graphics:21"
-    implementation "org.openjfx:javafx-fxml:21"
-    implementation "org.openjfx:javafx-base:21"
-    implementation "fr.litarvan:openauth:1.1.6"
+    implementation 'fr.litarvan:openauth:1.1.6'
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.openjfx:javafx-base:21'
+    implementation 'org.openjfx:javafx-controls:21'
+    implementation 'org.openjfx:javafx-graphics:21'
+    implementation 'org.openjfx:javafx-fxml:21'
+    implementation 'org.openjfx:javafx-web:21'
+    implementation 'org.openjfx:javafx-swing:21'
 }
 
-javafx {
-    version = "21"
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.base', 'javafx.web', 'javafx.swing' ]
+java {
+    modularity.inferModulePath = true
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 jlink {
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-    forceMerge("ALL-MODULE-PATH")
+    options = ['--strip-debug', '--compress=2', '--no-header-files', '--no-man-pages']
+    addExtraDependencies('javafx.base', 'javafx.controls', 'javafx.graphics', 'javafx.fxml', 'javafx.web', 'javafx.swing')
+    forceMerge('openauth')
     imageName = 'EspressoLauncher'
+
     launcher {
         name = 'EspressoLauncher'
     }
 
-    addExtraDependencies(
-            'com.google.gson',
-            'javafx.controls',
-            'javafx.graphics',
-            'javafx.fxml',
-            'javafx.web',
-            'javafx.swing',
-            'javafx.base'
-    )
-
     jpackage {
         appVersion = '1.0.0'
-        vendor = 'BreachInTheContainment' // creator(s)
-        icon = file('icons/icon.icns').absolutePath // mac = icns; win = ico; linux = png or svg
-        installerType = project.hasProperty('installerType') ? project.property('installerType') : 'dmg'
-        imageName = 'EspressoLauncher' // application name (maybe?)
-        installerName = 'EspressoInstaller' // installer name
-//        winConsole = false // doesn't allow the console to be ran but ONLY FOR COMPILING ON WINDOWS!!!
-    }
-}
-/*
-BEFORE UNCOMMENTING PLEASE CHECK THE REASON AT THE BOTTOM
-
-jar {
-    archiveBaseName.set("launcher_client")
-    archiveVersion.set("")
-
-    manifest {
-        attributes(
-                'Main-Class': application.mainClass
-        )
-    }
-
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-tasks.jpackage.dependsOn(tasks.jar)
-
-
-jpackage {
-    appVersion = '1.0.0'
-    vendor = "BreachInTheContainment"
-    appName = "EspressoLauncher"
-    input = "build/libs"
-    destination = "build/jpackage"
-    mainJar = "launcher_client.jar"
-    mainClass = application.mainClass
-    javaOptions = ["-Xmx1024m"]
-
-    mac {
-        icon = layout.projectDirectory.file("icons/icon.icns")
-    }
-    windows {
-        icon = layout.projectDirectory.file("icons/icon.ico")
-    }
-    linux {
-        icon = layout.projectDirectory.file("icons/icon.png")
+        vendor = 'BreachInTheContainment'
+        installerType = project.hasProperty('installerType') ? project.property('installerType') : detectInstallerType()
+        imageName = 'EspressoLauncher'
+        installerName = 'EspressoInstaller'
+        // Platform-specific jpackage options
+        jpackageOptions = detectJpackageOptions()
     }
 }
 
-commented out just incase
+// Helper function to detect installer type based on OS
+def detectInstallerType() {
+    def os = System.getProperty('os.name').toLowerCase()
+    if (os.contains('win')) {
+        return 'exe'
+    } else if (os.contains('mac')) {
+        return 'dmg'
+    } else {
+        return 'deb'
+    }
+}
 
-*/
+// Helper function to set platform-specific jpackage options
+def detectJpackageOptions() {
+    def os = System.getProperty('os.name').toLowerCase()
+    def options = []
+    if (os.contains('win')) {
+        options += ['--win-console', '--icon', file('icons/icon.ico').absolutePath]
+    } else if (os.contains('mac')) {
+        options += ['--mac-package-identifier', 'org.breachinthecontainment.launcher', '--icon', file('icons/icon.icns').absolutePath]
+    } else {
+        options += ['--icon', file('icons/icon.png').absolutePath]
+    }
+    return options
+}
+
+// Ensure module path includes JavaFX modules for compilation
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['--module-path', classpath.asPath]
+}
